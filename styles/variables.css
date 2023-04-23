@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans&display=swap");
+
+:root {
+  /* font */
+  --fontSize: 16px;
+  --fontFamily: "PT Sans", sans-serif;
+  --fontWeight: bold;
+
+  /* border */
+  --border: 1px inset;
+  --borderSolid: 1px solid;
+  --borderRadius: 5px;
+
+  /* color */
+  --primaryColor: #ddfbf5;
+  --secondaryColor: #a8f5e3;
+  --lightBg: #f8faf9;
+  --lightText: #342626;
+  --darkColor: #676464;
+  --dangerColor: #fa5555;
+  --bgColor: var(--lightBg);
+  --textColor: var(--lightText);
+
+  /* shadow */
+  --boxShadow: 2px 2px 3px var(--darkColor);
+}
