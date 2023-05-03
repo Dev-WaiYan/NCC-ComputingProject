@@ -61,7 +61,15 @@ switch ($__path) {
     //     break;
         // end - api
 
-        // start - page routes
+    // start - page routes
+    // admin routes
+    case '/admin':
+    case '/admin/profile':
+        require_once "controller/admin/AccountController.php";
+        $__app .= AccountController::view();
+        break;
+
+    // user routes
     case '/':
     case '/home':
         require_once "controller/HomeController.php";
@@ -107,6 +115,10 @@ switch ($__path) {
 }
 
 // if request is not to api, will require template.
-if (!str_contains($__path, '/api/v1')) {
+if (!str_contains($__path, '/api/v1') && !str_contains($__path, '/admin')) {
     require_once 'templates/layout.php';
+}
+
+if (!str_contains($__path, '/api/v1') && str_contains($__path, '/admin')) {
+    require_once 'templates/adminLayout.php';
 }

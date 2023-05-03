@@ -1,74 +1,9 @@
-.container-wrapper {
-  margin: 20px 0;
-  display: flex;
-  justify-content: center;
+.btn-primary {
+    background-color: var(--lightBg) !important;
+    color: var(--primaryColor) !important;
+    border-color: var(--primaryColor) !important;
 }
 
-.container form {
-  background-color: var(--primaryColor);
-  padding: 20px;
-  width: 100%;
-  border-radius: var(--borderRadius);
-}
-
-.required {
-  color: var(--dangerColor);
-}
-
-.form-group {
-  margin: 20px 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group .button-container {
-  display: flex;
-  justify-content: center;
-}
-
-select,
-input,
-textarea {
-  padding: 10px;
-  border-radius: var(--borderRadius);
-  box-shadow: var(--boxShadow);
-  outline: none;
-  border: none;
-}
-
-textarea {
-  resize: none;
-}
-
-input[type="checkbox"] {
-  box-shadow: none;
-}
-
-button {
-  border: var(--border);
-  border-radius: var(--borderRadius);
-  outline: none;
-  background-color: var(--primaryColor);
-  padding: 10px 20px;
-  min-width: 100px;
-  box-shadow: var(--boxShadow);
-}
-
-button:hover {
-  cursor: pointer;
-  border-style: solid;
-}
-
-::placeholder {
-  color: var(--textColor);
-}
-
-a {
-  text-decoration: underline;
-}
-
-#captcha-box {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
+.btn-primary:hover {
+    border-color: var(--secondaryColor) !important;
 }

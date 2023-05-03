@@ -19,7 +19,7 @@
     </div>
   </div>
   <div class="container">
-    <button class="btn btn-primary-outline" id="scroll-to-top">Top</button>
+    <button class="btn btn-primary" id="scroll-to-top">Top</button>
   </div>
 </footer>
 

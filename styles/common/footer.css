@@ -1,5 +1,4 @@
 .footer {
-  background-color: #f8f9fa;
   padding: 50px 0;
   text-align: center;
 }
@@ -8,14 +7,13 @@
   margin-bottom: 20px;
 }
 .footer ul li a {
-  color: #6c757d;
   font-size: 18px;
   text-decoration: none;
   display: block;
   margin-bottom: 10px;
 }
 .footer ul li a:hover {
-  color: #343a40;
+  color: var(--primaryColor) !important;
 }
 #scroll-to-top {
   display: none;

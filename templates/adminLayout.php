@@ -15,9 +15,9 @@
 
 <body>
     <?php
-    require_once 'templates/common/navBar/index.php';
+    require_once 'templates/common/admin/navBar/index.php';
     require_once $__app;
-    require_once 'templates/common/footer/index.php';
+    require_once 'templates/common/admin/footer/index.php';
     ?>
 
 

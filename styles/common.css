@@ -1,17 +1,3 @@
 @import url("./common/nav.css");
 @import url("./common/footer.css");
 @import url("./common/form.css");
-
-#credits {
-  display: flex;
-  justify-content: end;
-}
-
-#credits .title {
-  text-align: center;
-}
-
-.activeMenu {
-  color: var(--lightText);
-  font-weight: var(--fontWeight);
-}
