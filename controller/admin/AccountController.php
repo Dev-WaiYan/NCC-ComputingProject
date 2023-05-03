@@ -7,11 +7,10 @@ class AccountController
         return "/admin/account/index.php";
     }
 
-
-    // public static function getData()
-    // {
-    //     require_once 'services/ReviewService.php';
-    //     $latestReviews = ReviewService::getLatestReviews();
-    //     return (object)['latestReviews' => $latestReviews];
-    // }
+    public static function getData() {
+        require_once 'services/admin/RoleService.php';
+        $roles = RoleService::getRoles();
+        return (object)['roles' => $roles];
+    }
+    
 }

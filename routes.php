@@ -26,15 +26,15 @@ switch ($__path) {
         break;
         // end - test
 
-        // start - api
+    // start - api
     // case '/api/v1/login':
     //     require_once "controller/api/AccountController.php";
     //     AccountController::login();
     //     break;
-    // case '/api/v1/register':
-    //     require_once "controller/api/AccountController.php";
-    //     AccountController::register();
-    //     break;
+    case '/api/v1/register':
+        require_once "controller/api/admin/AccountController.php";
+        AccountController::register();
+        break;
     // case '/api/v1/contact':
     //     require_once "controller/api/ContactController.php";
     //     ContactController::submitContact();
