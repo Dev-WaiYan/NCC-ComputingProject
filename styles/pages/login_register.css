@@ -1,0 +1,14 @@
+.container {
+  width: 50vw;
+}
+
+.info-container {
+  text-align: center;
+}
+
+/* Small screen */
+@media only screen and (max-width: 768px) {
+  .container {
+    width: 80vw;
+  }
+}

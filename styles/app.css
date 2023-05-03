@@ -1,0 +1,17 @@
+@import url("./variables.css");
+@import url("./common.css");
+@import url("https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css");
+
+* {
+  box-sizing: border-box;
+  font-family: var(--fontFamily);
+  font-size: var(--fontSize);
+  color: var(--textColor);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bgColor);
+}
