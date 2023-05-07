@@ -86,6 +86,17 @@ class Db implements IDb
         return !empty($data) ? $data : null;
     }
 
+
+    public static function selectOne($table, $conditions = array()) {
+        $conditions['limit'] = 1; // Set limit to 1 to get only one row
+        $result = self::select($table, $conditions);
+        if (!empty($result)) {
+            return $result[0]; // Return the first (and only) row
+        } else {
+            return null;
+        }
+    }
+
     public static function updateOne($table, $id, $data)
     {
         if (!empty($data) && is_array($data)) {

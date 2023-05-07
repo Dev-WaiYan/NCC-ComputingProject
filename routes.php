@@ -26,15 +26,33 @@ switch ($__path) {
         break;
         // end - test
 
-    // start - api
+    // api routes
+    // start - Admin api routes
+    case '/admin/api/v1/register':
+        require_once "controller/api/admin/AccountController.php";
+        AccountController::register();
+        break;
+    case '/admin/api/v1/category':
+        require_once 'services/admin/CategoryService.php';
+        require_once "controller/api/admin/CategoryController.php";
+        if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_REQUEST['id'])) {
+            CategoryController::show();
+        }
+        else if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            CategoryController::add();
+        }
+        else if ($_SERVER["REQUEST_METHOD"] === "PUT") {
+            CategoryController::update();
+        }
+        else if ($_SERVER["REQUEST_METHOD"] === "DELETE") {
+            CategoryController::delete();
+        }
+        break;
+    // end - Admin api routes
     // case '/api/v1/login':
     //     require_once "controller/api/AccountController.php";
     //     AccountController::login();
     //     break;
-    case '/api/v1/register':
-        require_once "controller/api/admin/AccountController.php";
-        AccountController::register();
-        break;
     // case '/api/v1/contact':
     //     require_once "controller/api/ContactController.php";
     //     ContactController::submitContact();
@@ -67,6 +85,10 @@ switch ($__path) {
     case '/admin/profile':
         require_once "controller/admin/AccountController.php";
         $__app .= AccountController::view();
+        break;
+    case '/admin/category':
+        require_once "controller/admin/CategoryController.php";
+        $__app .= CategoryController::view();
         break;
 
     // user routes
@@ -103,6 +125,8 @@ switch ($__path) {
     //     require_once "controller/AccountController.php";
     //     $__app .= AccountController::registerView();
     //     break;
+    default: 
+        die($__path);
     // default:
     //     if (isset($_SESSION['userId'])) {
     //         require_once "controller/HomeController.php";

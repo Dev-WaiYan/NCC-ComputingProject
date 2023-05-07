@@ -7,3 +7,13 @@
 .btn-primary:hover {
     border-color: var(--secondaryColor) !important;
 }
+
+.btn-danger {
+    background-color: var(--lightBg) !important;
+    color: var(--dangerColor) !important;
+    border-color: var(--dangerColor) !important;
+}
+
+.btn-danger:hover {
+    border-color: var(--secondaryColor) !important;
+}
