@@ -1,7 +1,7 @@
 <?php
 $__cssLinks = ['styles/pages/products.css'];
 
-// $data = HomeController::getData();
+$data = ProductController::getData();
 
 ?>
 
@@ -10,10 +10,10 @@ $__cssLinks = ['styles/pages/products.css'];
   <div class="row">
     <div class="col-md-3">
       <ul class="list-group sticky-top">
-        <li class="list-group-item active">List Item 1</li>
-        <li class="list-group-item">List Item 2</li>
-        <li class="list-group-item">List Item 3</li>
-        <li class="list-group-item">List Item 4</li>
+        <!-- <li class="list-group-item active">List Item 1</li> -->
+      <?php foreach ($data->categories as $value) { ?>
+        <a href='?category=<?php echo $value['id']; ?>'><li class='list-group-item <?php echo (isset($_REQUEST['category']) && $_REQUEST['category'] == $value['id']) ? "active" : ""; ?>' style="text-transform: capitalize;"><?php echo $value['category_name']; ?></li></a>
+      <?php } ?>
       </ul>
     </div>
     <div class="col-md-9">

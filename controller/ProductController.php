@@ -8,10 +8,10 @@ class ProductController
     }
 
 
-    // public static function getData()
-    // {
-    //     require_once 'services/ReviewService.php';
-    //     $latestReviews = ReviewService::getLatestReviews();
-    //     return (object)['latestReviews' => $latestReviews];
-    // }
+    public static function getData()
+    {
+        require_once 'services/common/CategoryService.php';
+        $categories = CategoryService::getCategories();
+        return (object)['categories' => $categories];
+    }
 }
