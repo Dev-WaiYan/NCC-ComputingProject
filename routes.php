@@ -1,6 +1,5 @@
 <?php
 
-define("BASE_URL", "/Projects/ncc/NCC-ComputingProject");
 $__path = str_replace(BASE_URL, "", $_SERVER['REQUEST_URI']);
 $__path = explode("?", $__path)[0];
 $__app = 'pages';
@@ -26,8 +25,8 @@ switch ($__path) {
         break;
         // end - test
 
-    // api routes
-    // start - Admin api routes
+        // api routes
+        // start - Admin api routes
     case '/admin/api/v1/register':
         require_once "controller/api/admin/AccountController.php";
         AccountController::register();
@@ -37,50 +36,60 @@ switch ($__path) {
         require_once "controller/api/admin/CategoryController.php";
         if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_REQUEST['id'])) {
             CategoryController::show();
-        }
-        else if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        } else if ($_SERVER["REQUEST_METHOD"] === "POST") {
             CategoryController::add();
-        }
-        else if ($_SERVER["REQUEST_METHOD"] === "PUT") {
+        } else if ($_SERVER["REQUEST_METHOD"] === "PUT") {
             CategoryController::update();
-        }
-        else if ($_SERVER["REQUEST_METHOD"] === "DELETE") {
+        } else if ($_SERVER["REQUEST_METHOD"] === "DELETE") {
             CategoryController::delete();
         }
         break;
-    // end - Admin api routes
-    // case '/api/v1/login':
-    //     require_once "controller/api/AccountController.php";
-    //     AccountController::login();
-    //     break;
-    // case '/api/v1/contact':
-    //     require_once "controller/api/ContactController.php";
-    //     ContactController::submitContact();
-    //     break;
-    // case '/api/v1/review':
-    //     require_once "controller/api/ReviewController.php";
-    //     ReviewController::submitReview();
-    //     break;
-    // case '/api/v1/pitch-booking':
-    //     require_once "controller/api/BookingController.php";
-    //     BookingController::pitchBooking();
-    //     break;
-    // case '/api/v1/swimming-session-booking':
-    //     require_once "controller/api/BookingController.php";
-    //     BookingController::swimmingSessionBooking();
-    //     break;
-    // case '/api/v1/area_pitch_info':
-    //     require_once "controller/api/BookingController.php";
-    //     BookingController::getAreaPitchInfo();
-    //     break;
-    // case '/api/v1/area_swimming_session_info':
-    //     require_once "controller/api/BookingController.php";
-    //     BookingController::getAreaSwimmingSessionInfo();
-    //     break;
+    case '/admin/api/v1/product':
+        require_once 'services/admin/ProductService.php';
+        require_once "controller/api/admin/ProductController.php";
+        if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_REQUEST['id'])) {
+            ProductController::show();
+        } else if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_REQUEST['id'])) {
+            ProductController::update();
+        } else if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            ProductController::add();
+        } else if ($_SERVER["REQUEST_METHOD"] === "DELETE") {
+            ProductController::delete();
+        }
+        break;
+        // end - Admin api routes
+        // case '/api/v1/login':
+        //     require_once "controller/api/AccountController.php";
+        //     AccountController::login();
+        //     break;
+        // case '/api/v1/contact':
+        //     require_once "controller/api/ContactController.php";
+        //     ContactController::submitContact();
+        //     break;
+        // case '/api/v1/review':
+        //     require_once "controller/api/ReviewController.php";
+        //     ReviewController::submitReview();
+        //     break;
+        // case '/api/v1/pitch-booking':
+        //     require_once "controller/api/BookingController.php";
+        //     BookingController::pitchBooking();
+        //     break;
+        // case '/api/v1/swimming-session-booking':
+        //     require_once "controller/api/BookingController.php";
+        //     BookingController::swimmingSessionBooking();
+        //     break;
+        // case '/api/v1/area_pitch_info':
+        //     require_once "controller/api/BookingController.php";
+        //     BookingController::getAreaPitchInfo();
+        //     break;
+        // case '/api/v1/area_swimming_session_info':
+        //     require_once "controller/api/BookingController.php";
+        //     BookingController::getAreaSwimmingSessionInfo();
+        //     break;
         // end - api
 
-    // start - page routes
-    // admin routes
+        // start - page routes
+        // admin routes
     case '/admin':
     case '/admin/profile':
         require_once "controller/admin/AccountController.php";
@@ -90,8 +99,12 @@ switch ($__path) {
         require_once "controller/admin/CategoryController.php";
         $__app .= CategoryController::view();
         break;
+    case '/admin/product':
+        require_once "controller/admin/ProductController.php";
+        $__app .= ProductController::view();
+        break;
 
-    // user routes
+        // user routes
     case '/':
     case '/home':
         require_once "controller/HomeController.php";
@@ -101,40 +114,40 @@ switch ($__path) {
         require_once "controller/ProductController.php";
         $__app .= ProductController::view();
         break;
-    // case '/contact':
-    //     require_once "controller/ContactController.php";
-    //     $__app .= ContactController::view();
-    //     break;
-    // case '/give-review':
-    //     require_once "controller/ReviewController.php";
-    //     $__app .= ReviewController::view();
-    //     break;
-    // case '/privacy-policy':
-    //     require_once "controller/PrivacyPolicyController.php";
-    //     $__app .= PrivacyPolicyController::view();
-    //     break;
-    // case '/login':
-    //     require_once "controller/AccountController.php";
-    //     $__app .= AccountController::loginView();
-    //     break;
-    // case '/logout':
-    //     require_once "controller/AccountController.php";
-    //     AccountController::logout();
-    //     break;
-    // case '/register':
-    //     require_once "controller/AccountController.php";
-    //     $__app .= AccountController::registerView();
-    //     break;
-    default: 
+        // case '/contact':
+        //     require_once "controller/ContactController.php";
+        //     $__app .= ContactController::view();
+        //     break;
+        // case '/give-review':
+        //     require_once "controller/ReviewController.php";
+        //     $__app .= ReviewController::view();
+        //     break;
+        // case '/privacy-policy':
+        //     require_once "controller/PrivacyPolicyController.php";
+        //     $__app .= PrivacyPolicyController::view();
+        //     break;
+        // case '/login':
+        //     require_once "controller/AccountController.php";
+        //     $__app .= AccountController::loginView();
+        //     break;
+        // case '/logout':
+        //     require_once "controller/AccountController.php";
+        //     AccountController::logout();
+        //     break;
+        // case '/register':
+        //     require_once "controller/AccountController.php";
+        //     $__app .= AccountController::registerView();
+        //     break;
+    default:
         die($__path);
-    // default:
-    //     if (isset($_SESSION['userId'])) {
-    //         require_once "controller/HomeController.php";
-    //         $__app .= HomeController::view();
-    //     } else {
-    //         require_once "controller/AccountController.php";
-    //         $__app .= AccountController::loginView();
-    //     }
+        // default:
+        //     if (isset($_SESSION['userId'])) {
+        //         require_once "controller/HomeController.php";
+        //         $__app .= HomeController::view();
+        //     } else {
+        //         require_once "controller/AccountController.php";
+        //         $__app .= AccountController::loginView();
+        //     }
         // end - page routes
 }
 

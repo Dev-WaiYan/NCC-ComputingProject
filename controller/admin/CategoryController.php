@@ -11,7 +11,7 @@ class CategoryController
         require_once 'services/admin/CategoryService.php';
         $categories = CategoryService::getCategories();
 
-        return (object)['categories' => $categories];
+        return (object)['categories' => is_array($categories) ? $categories : []];
     }
     
 }
