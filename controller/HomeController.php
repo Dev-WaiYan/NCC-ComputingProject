@@ -8,10 +8,10 @@ class HomeController
     }
 
 
-    // public static function getData()
-    // {
-    //     require_once 'services/ReviewService.php';
-    //     $latestReviews = ReviewService::getLatestReviews();
-    //     return (object)['latestReviews' => $latestReviews];
-    // }
+    public static function getData()
+    {
+        require_once 'services/common/ProductService.php';
+        $latestProducts = ProductService::getProducts(['order_by' => 'id desc', 'limit' => 8]);
+        return (object)['latestProducts' => $latestProducts];
+    }
 }

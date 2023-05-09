@@ -91,6 +91,8 @@ switch ($__path) {
         // start - page routes
         // admin routes
     case '/admin':
+        header("Location: admin/profile");
+        break;
     case '/admin/profile':
         require_once "controller/admin/AccountController.php";
         $__app .= AccountController::view();

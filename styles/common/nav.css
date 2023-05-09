@@ -1,3 +1,7 @@
 .navbar-brand {
-    color: var(--primaryColor) !important;
+  color: var(--primaryColor) !important;
+}
+
+a {
+  text-decoration: none !important;
 }

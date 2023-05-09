@@ -49,7 +49,11 @@ class Db implements IDb
             $i = 0;
             foreach ($conditions['where'] as $key => $value) {
                 $pre = ($i > 0) ? ' AND ' : '';
-                $sql .= $pre . $key . " = '" . $value . "'";
+                if (strpos($value, 'like ') === 0) { // check for "like" operator at the beginning of the value
+                    $sql .= $pre . $key . ' LIKE \'' . substr($value, 5) . '\'';
+                } else {
+                    $sql .= $pre . $key . " = '" . $value . "'";
+                }
                 $i++;
             }
         }
@@ -87,7 +91,9 @@ class Db implements IDb
     }
 
 
-    public static function selectOne($table, $conditions = array()) {
+
+    public static function selectOne($table, $conditions = array())
+    {
         $conditions['limit'] = 1; // Set limit to 1 to get only one row
         $result = self::select($table, $conditions);
         if (!empty($result)) {

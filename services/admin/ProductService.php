@@ -3,13 +3,13 @@
 class ProductService
 {
 
-    public static function getProducts()
+    public static function getProducts($conditions = [])
     {
 
         $result = [];
 
         try {
-            $result = Db::select('products');
+            $result = Db::select('products', $conditions);
         } catch (Exception $e) {
             die('Error in Product Service : ' . $e->getMessage());
         }

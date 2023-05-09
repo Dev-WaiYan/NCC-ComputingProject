@@ -10,7 +10,7 @@ class ProductController
     public static function getData() {
         require_once 'services/admin/ProductService.php';
         require_once 'services/admin/CategoryService.php';
-        $products = ProductService::getProducts();
+        $products = ProductService::getProducts(['order_by' => 'id desc']);
         $categories = CategoryService::getCategories();
 
         return (object)[

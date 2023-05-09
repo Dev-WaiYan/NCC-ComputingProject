@@ -33,46 +33,55 @@ $data = ProductController::getData();
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Add New</button>
         </div>
     </div>
-    <table class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Cover Img</th>
-                <th scope="col">Price</th>
-                <th scope="col">Category</th>
-                <th scope="col">Created At</th>
-                <th scope="col">Updated At</th>
-                <th scope="col">Operation</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            foreach ($data->products as $value) {
-                if (is_array($value)) { ?>
-                    <tr>
-                        <th scope="row"><?php echo $value['id'] ?></th>
-                        <td><?php echo $value['name'] ?></td>
-                        <td><?php echo $value['description'] ?></td>
-                        <td><?php echo "<img src=" . STORAGE_BASE_URL . "/" . $value['cover_img'] . " class='img-fluid' />" ?></td>
-                        <td><?php echo $value['price'] ?></td>
-                        <td>
-                            <strong>
-                                <?php echo
-                                $data->categories[array_search($value['product_category_id'], array_column($data->categories, 'id'))]['category_name']
-                                ?>
-                            </strong>
-                        </td>
-                        <td><?php echo $value['created_at'] ?></td>
-                        <td><?php echo $value['updated_at'] ?></td>
-                        <td><button class="btn btn-primary mb-2 me-3" data-bs-toggle="modal" data-bs-target="#editModal" onclick="defineEditedItem(<?php echo $value['id']; ?>)">Edit</button><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="defineDeletedItem(<?php echo $value['id']; ?>)">Delete</button></td>
-                    </tr>
-            <?php }
-            }
-            ?>
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Cover Img</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Created At</th>
+                    <th scope="col">Updated At</th>
+                    <th scope="col">Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($data->products as $value) {
+                    if (is_array($value)) { ?>
+                        <tr>
+                            <th scope="row"><?php echo $value['id'] ?></th>
+                            <td><?php echo $value['name'] ?></td>
+                            <td><?php echo "<img src=" . STORAGE_BASE_URL . "/" . $value['cover_img'] . " class='img-fluid' />" ?></td>
+                            <td><?php echo $value['price'] ?></td>
+                            <td>
+                                <strong>
+                                    <?php echo
+                                    $data->categories[array_search($value['product_category_id'], array_column($data->categories, 'id'))]['category_name']
+                                    ?>
+                                </strong>
+                            </td>
+                            <td><?php echo $value['created_at'] ?></td>
+                            <td><?php echo $value['updated_at'] ?></td>
+                            <td><button class="btn btn-primary mb-2 me-3" data-bs-toggle="modal" data-bs-target="#editModal" onclick="defineEditedItem(<?php echo $value['id']; ?>)">Edit</button><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="defineDeletedItem(<?php echo $value['id']; ?>)">Delete</button></td>
+                        </tr>
+                <?php }
+                }
+                ?>
+            </tbody>
+        </table>
+        <!-- <nav aria-label="products">
+            <ul class="pagination justify-content-center">
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item" aria-current="page">
+                    <a class="page-link" href="#">2</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+            </ul>
+        </nav> -->
+    </div>
     <!-- form utils -->
     <input type="hidden" id="editedItemId" />
     <input type="hidden" id="deletedItemId" />
@@ -93,8 +102,12 @@ $data = ProductController::getData();
                         <input type="text" class="form-control" id="n_name">
                     </div>
                     <div class="mb-3">
+                        <label for="n_shortDescription" class="form-label">Short Description</label>
+                        <input type="text" class="form-control" id="n_shortDescription">
+                    </div>
+                    <div class="mb-3">
                         <label for="n_description" class="form-label">Description</label>
-                        <textarea name="n_Description" id="n_description"></textarea>
+                        <textarea name="n_description" id="n_description"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="n_coverImg" class="form-label">Cover Img</label>
@@ -136,6 +149,10 @@ $data = ProductController::getData();
                     <div class="mb-3">
                         <label for="e_name" class="form-label">Name</label>
                         <input type="text" class="form-control" id="e_name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="e_shortDescription" class="form-label">Short Description</label>
+                        <input type="text" class="form-control" id="e_shortDescription">
                     </div>
                     <div class="mb-3">
                         <label for="e_description" class="form-label">Description</label>
@@ -279,6 +296,7 @@ $data = ProductController::getData();
                     const {
                         name,
                         price,
+                        short_description,
                         product_category_id,
                         cover_img,
                         description
@@ -287,6 +305,7 @@ $data = ProductController::getData();
                     $('#e_currentCoverImg').attr("src", `${STORAGE_BASE_URL}${cover_img}`);
 
                     $('#e_name').val(name);
+                    $('#e_shortDescription').val(short_description);
                     $('#e_price').val(price);
                     $("#e_category").val(product_category_id);
                 } else {
@@ -308,6 +327,7 @@ $data = ProductController::getData();
 
     function add() {
         const nName = $('#n_name').val();
+        const nShortDescription = $('#n_shortDescription').val();
         const nPrice = $('#n_price').val();
         const nCategoryId = $('#n_category').val();
         const nDescription = nEditor.getData();
@@ -315,6 +335,7 @@ $data = ProductController::getData();
         if (nName && nPrice && nCategoryId && nDescription && coverImgFile) {
             const formData = new FormData();
             formData.append('nName', nName);
+            formData.append('nShortDescription', nShortDescription);
             formData.append('nPrice', nPrice);
             formData.append('nCategoryId', nCategoryId);
             formData.append('nDescription', nDescription);
@@ -347,6 +368,7 @@ $data = ProductController::getData();
         const id = $('#editedItemId').val();
         const eName = $('#e_name').val();
         const ePrice = $('#e_price').val();
+        const eShortDescription = $('#e_shortDescription').val();
         const eCategoryId = $('#e_category').val();
         const eDescription = eEditor.getData();
 
@@ -355,6 +377,7 @@ $data = ProductController::getData();
             const formData = new FormData();
             formData.append('eName', eName);
             formData.append('ePrice', ePrice);
+            formData.append('eShortDescription', eShortDescription);
             formData.append('eCategoryId', eCategoryId);
             formData.append('eDescription', eDescription);
             coverImgFile && formData.append('coverImgFile', coverImgFile);

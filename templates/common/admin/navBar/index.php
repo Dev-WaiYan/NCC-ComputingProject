@@ -14,7 +14,7 @@
         </li>
       </ul>
       <div class="d-block d-md-flex align-items-center" role="search">
-        <div class="me-4"><a>PROFILE</a></div>
+        <div class="me-4"><a href="profile">PROFILE</a></div>
         <div class="mt-4 mt-md-0">
           <button class="btn btn-primary" type="submit">LOGOUT</button>
         </div>

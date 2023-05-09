@@ -26,6 +26,7 @@ class ProductController
                 'price' => $_POST['nPrice'],
                 'product_category_id' => $_POST['nCategoryId'],
                 'description' => $_POST['nDescription'],
+                'short_description' => $_POST['nShortDescription'],
                 'cover_img' => 'uploads/' . $fileName
             );
             ProductService::addProduct($data);
@@ -48,6 +49,7 @@ class ProductController
             'price' => $_POST['ePrice'],
             'product_category_id' => $_POST['eCategoryId'],
             'description' => $_POST['eDescription'],
+            'short_description' => $_POST['eShortDescription'],
         ];
         
         if (isset($fileName)) {
