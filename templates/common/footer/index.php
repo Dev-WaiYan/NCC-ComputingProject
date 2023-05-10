@@ -21,6 +21,10 @@
   <div class="container">
     <button class="btn btn-primary" id="scroll-to-top">Top</button>
   </div>
+  <div id="cart-container">
+    <strong>0</strong>
+    <button class="btn btn-primary" id="cart"><i class="ri-shopping-cart-fill"></i></button>
+  </div>
 </footer>
 
 <script>

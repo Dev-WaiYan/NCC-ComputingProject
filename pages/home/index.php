@@ -10,7 +10,7 @@ $data = HomeController::getData();
     <div class="banner-text">
       <h1>Welcome to our Computer Accessories Shop</h1>
       <p>Shop our latest collection of computer accessories.</p>
-      <a href="#" class="btn btn-primary">Shop Now</a>
+      <a href="products" class="btn btn-primary">Shop Now</a>
     </div>
   </div>
 
@@ -29,8 +29,8 @@ $data = HomeController::getData();
               <p class="card-text"><?php echo substr($value['short_description'], 0, 100) ?></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View Details</button>
-                  <button type="button" class="btn btn-sm ms-2 btn-outline-secondary">Reviews</button>
+                  <button type="button" class="btn btn-sm btn-primary">View Details</button>
+                  <button type="button" class="btn btn-sm ms-2 btn-primary">Reviews</button>
                 </div>
                 <small class="text-muted">USD - <?php echo $value['price'] ?></small>
               </div>
@@ -42,7 +42,7 @@ $data = HomeController::getData();
 
       ?>
     </div>
-    <div class="container text-center mb-4"><a href="#" class="btn btn-primary">Shop Now</a></div>
+    <div class="container text-center mb-4"><a href="products" class="btn btn-primary">Shop Now</a></div>
   </div>
 </main>
 

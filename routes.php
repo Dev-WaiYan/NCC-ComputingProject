@@ -58,35 +58,22 @@ switch ($__path) {
         }
         break;
         // end - Admin api routes
-        // case '/api/v1/login':
-        //     require_once "controller/api/AccountController.php";
-        //     AccountController::login();
-        //     break;
-        // case '/api/v1/contact':
-        //     require_once "controller/api/ContactController.php";
-        //     ContactController::submitContact();
-        //     break;
-        // case '/api/v1/review':
-        //     require_once "controller/api/ReviewController.php";
-        //     ReviewController::submitReview();
-        //     break;
-        // case '/api/v1/pitch-booking':
-        //     require_once "controller/api/BookingController.php";
-        //     BookingController::pitchBooking();
-        //     break;
-        // case '/api/v1/swimming-session-booking':
-        //     require_once "controller/api/BookingController.php";
-        //     BookingController::swimmingSessionBooking();
-        //     break;
-        // case '/api/v1/area_pitch_info':
-        //     require_once "controller/api/BookingController.php";
-        //     BookingController::getAreaPitchInfo();
-        //     break;
-        // case '/api/v1/area_swimming_session_info':
-        //     require_once "controller/api/BookingController.php";
-        //     BookingController::getAreaSwimmingSessionInfo();
-        //     break;
-        // end - api
+
+        // start - client api routes
+    case '/api/v1/login':
+        require_once "controller/api/AccountController.php";
+        AccountController::login();
+        break;
+    case '/api/v1/logout':
+        require_once "controller/api/AccountController.php";
+        AccountController::logout();
+        break;
+    case '/api/v1/register':
+        require_once "controller/api/AccountController.php";
+        AccountController::register();
+        break;
+        // end - client api routes
+        // end - api routes
 
         // start - page routes
         // admin routes
@@ -115,6 +102,14 @@ switch ($__path) {
     case '/products':
         require_once "controller/ProductController.php";
         $__app .= ProductController::view();
+        break;
+    case '/login':
+        require_once "controller/AccountController.php";
+        $__app .= AccountController::loginView();
+        break;
+    case '/register':
+        require_once "controller/AccountController.php";
+        $__app .= AccountController::registerView();
         break;
         // case '/contact':
         //     require_once "controller/ContactController.php";

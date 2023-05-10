@@ -7,16 +7,20 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="home">Home</a>
+          <a class="nav-link" aria-current="page" href="home">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="products">Products</a>
-        </li>     
+        </li>
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" id="searchInput" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-primary" type="button" onclick="search()">Search</button>
       </form>
+      <div class="nav-item my-2 my-sm-0 mx-0 mx-sm-2">
+        <?php echo !isset($_SESSION['userId']) ? "<a class='nav-link' aria-current='page' href='login'>Login</a>" : "" ?>
+        <?php echo isset($_SESSION['userId']) ? "<a class='nav-link text-danger' aria-current='page' onclick='logout()'>Logout</a>" : "" ?>
+      </div>
     </div>
   </div>
 </nav>
@@ -26,5 +30,26 @@
     const searchStr = $('#searchInput').val();
 
     window.location.href = `products?search=${searchStr}`;
+  }
+
+  function logout() {
+    $.ajax({
+      method: "POST",
+      url: 'api/v1/logout',
+      data: {},
+      success: function(response) {
+        if (response.success) {
+          setTimeout(() => {
+            window.location.replace('login');
+          }, 1000)
+        } else {
+          alert("Logout failed.");
+        }
+      },
+      error: function(xhr, status, error) {
+        console.error(xhr);
+        alert("Something went wrong.");
+      }
+    });
   }
 </script>

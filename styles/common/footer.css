@@ -1,23 +1,45 @@
 .footer {
+  border-top: solid 1px;
   padding: 50px 0;
   text-align: center;
 }
+
 .footer h3 {
   font-size: 24px;
   margin-bottom: 20px;
 }
+
 .footer ul li a {
   font-size: 18px;
   text-decoration: none;
   display: block;
   margin-bottom: 10px;
 }
+
 .footer ul li a:hover {
   color: var(--primaryColor) !important;
 }
+
 #scroll-to-top {
   display: none;
   position: fixed;
   bottom: 20px;
   right: 20px;
+}
+
+#cart-container strong {
+  position: absolute;
+  top: -20px;
+  right: -10px;
+  color: var(--primaryColor) !important;
+}
+
+#cart-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+
+#cart i {
+  color: var(--primaryColor) !important;
 }

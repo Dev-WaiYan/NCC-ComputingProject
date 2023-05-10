@@ -4,7 +4,11 @@ class ProductController
 {
     public static function view()
     {
-        return "/products/index.php";
+        if (isset($_REQUEST['product'])) {
+            return "/products/detail.php";
+        } else {
+            return "/products/index.php";
+        }
     }
 
 
@@ -46,5 +50,26 @@ class ProductController
         }
 
         return (object)['categories' => $categories, 'products' => $products];
+    }
+
+    public static function getDetail()
+    {
+        require_once 'services/common/CategoryService.php';
+        require_once 'services/common/ProductService.php';
+
+        $product = null;
+        $relatedCategory = null;
+
+        $product = ProductService::getProduct($_REQUEST['product']);
+        if ($product) {
+            $categories = CategoryService::getCategories();
+
+            $index = array_search($product['product_category_id'], array_column($categories, 'id'));
+            if ($index !== false) {
+                $relatedCategory = $categories[$index];
+            }
+        }
+
+        return (object)['product' => $product, 'category' => $relatedCategory];
     }
 }

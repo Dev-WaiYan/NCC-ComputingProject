@@ -1,79 +1,62 @@
 <?php
-$__cssLinks = ['styles/pages/login_register.css'];
+$__cssLinks = ['styles/pages/register.css'];
 ?>
 
-<main class="container-wrapper">
-    <div class="container">
-        <h1>Register</h1>
-        <form>
-            <div class="form-group">
-                <label for="userEmail">Email <span class="required">*</span></label>
-                <input id="userEmail" name="userEmail" type="email" />
-            </div>
-            <div class="form-group">
-                <label for="firstName">First Name <span class="required">*</span></label>
-                <input id="firstName" name="firstName" type="text" />
-            </div>
-            <div class="form-group">
-                <label for="surName">Sur Name <span class="required">*</span></label>
-                <input id="surName" name="surName" type="text" />
-            </div>
-            <div class="form-group">
-                <label for="password">Password <span class="required">*</span></label>
-                <input id="password" name="password" type="password" />
-            </div>
-            <div class="form-group">
-                <label for="confirmPassword">Confirm Password <span class="required">*</span></label>
-                <input id="confirmPassword" name="confirmPassword" type="password" />
-            </div>
-            <div class="form-group">
-                <div class="button-container">
-                    <button type="button" onclick="register()">Register</button>
-                </div>
-            </div>
-            <div class="info-container">
+<main class="container my-5 px-4">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 mx-auto">
+            <h1>Register Form</h1>
+            <form>
                 <div class="form-group">
-                    <a href="privacy-policy">Privacy Policy</a>
+                    <label for="userName">Username:</label>
+                    <input type="text" class="form-control" id="userName" name="userName" required>
                 </div>
                 <div class="form-group">
-                    <a href="login">I already have an user account. Login.</a>
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
                 </div>
-            </div>
-        </form>
+                <div class="form-group">
+                    <label for="phone">Phone:</label>
+                    <input type="text" class="form-control" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <div class="form-group my-3 d-flex justify-content-end align-items-center">
+                    <a href="login" class="mx-4">Login</a>
+                    <button type="button" class="btn btn-primary" onclick="register()">Register</button>
+                </div>
+            </form>
+        </div>
     </div>
 </main>
 
 <script>
     function register() {
-        const userEmail = $('#userEmail').val();
+        const email = $('#email').val();
         const password = $('#password').val();
-        const confirmPassword = $('#confirmPassword').val();
-        const firstName = $('#firstName').val();
-        const surName = $('#surName').val();
+        const userName = $('#userName').val();
+        const phone = $('#phone').val();
 
         if (!isValidPassword(password)) {
             alert("Please valid password. Password must have min 8 letter password, with at least a symbol, upper and lower case letters and a number.");
             return;
         }
 
-        if (userEmail && password && confirmPassword && firstName && surName) {
-            if (password !== confirmPassword) {
-                alert("Password and Confirm Password are not same.")
-                return;
-            }
-
+        if (email && password && userName && phone) {
             $.ajax({
                 method: "POST",
                 url: 'api/v1/register',
                 data: {
-                    userEmail,
+                    email,
                     password,
-                    firstName,
-                    surName,
+                    userName,
+                    phone
                 },
                 success: function(response) {
                     if (response.existedUser) {
-                        alert("Your account has existed already.");
+                        alert("Account has existed already.");
                     } else {
                         alert("Successfully registered. Will redirect soon to login.");
                     }
