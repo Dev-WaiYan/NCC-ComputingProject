@@ -28,6 +28,11 @@ $__cssLinks = ['styles/pages/login.css'];
     function login() {
         const email = $('#email').val();
         const password = $('#password').val();
+        const queryString = window.location.search;
+const searchParams = new URLSearchParams(queryString);
+const isNeedToRedirect = searchParams.get('redirect');
+
+console.log("isNeedTo", isNeedToRedirect)
 
         if (email && password) {
             $.ajax({
@@ -41,7 +46,11 @@ $__cssLinks = ['styles/pages/login.css'];
                     if (response.user) {
                         setTimeout(() => {
                             alert("Login success. Redirect soon.");
-                            window.location.replace('home');
+                            if (isNeedToRedirect === 'true') {
+                                history.back();
+                            } else {
+                                window.location.replace('home');
+                            }
                         }, 1000)
                     } else {
                         alert("Credentials do not match.");

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,14 +11,13 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </head>
-
 <body>
     <?php
+    require_once 'templates/common/utils/toast.php';
     require_once 'templates/common/navBar/index.php';
     require_once $__app;
     require_once 'templates/common/footer/index.php';
     ?>
-
 
     <!-- Add external css for related pages -->
     <script type="text/javascript">
@@ -38,5 +36,4 @@
     </script>
     <script src="js/utils/passwordUtils.js" defer></script>
 </body>
-
 </html>

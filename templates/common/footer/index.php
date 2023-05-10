@@ -22,13 +22,26 @@
     <button class="btn btn-primary" id="scroll-to-top">Top</button>
   </div>
   <div id="cart-container">
-    <strong>0</strong>
+    <strong id="cart-count">0</strong>
     <button class="btn btn-primary" id="cart"><i class="ri-shopping-cart-fill"></i></button>
   </div>
 </footer>
 
 <script>
   $(document).ready(function() {
+
+    // start - cart
+    const storedItemsString = sessionStorage.getItem('cart');
+    let storedItems = [];
+    if (storedItemsString) {
+      const items = JSON.parse(storedItemsString)
+      if (Array.isArray(items)) {
+        storedItems = items;
+      }
+    }
+    $('#cart-count').text(storedItems.length);
+    // end - cart
+
     $(window).scroll(function() {
       if ($(this).scrollTop() > 200) {
         $('#scroll-to-top').fadeIn();

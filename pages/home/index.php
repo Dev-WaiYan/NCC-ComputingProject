@@ -21,7 +21,7 @@ $data = HomeController::getData();
       foreach ($data->latestProducts as $value) {
       ?>
 
-        <div class="col-md-4">
+        <div class="col-md-4" onclick=<?php echo "viewDetail(" . $value['id'] . ")" ?>>
           <div class="card mb-4 shadow-sm">
             <img class="card-img-top cover-img" src=<?php echo STORAGE_BASE_URL . '/' . $value['cover_img'] ?> alt="cover img">
             <div class="card-body">
@@ -29,7 +29,7 @@ $data = HomeController::getData();
               <p class="card-text"><?php echo substr($value['short_description'], 0, 100) ?></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-primary">View Details</button>
+                  <button type="button" class="btn btn-sm btn-primary" onclick=<?php echo "viewDetail(" . $value['id'] . ")" ?>>View Details</button>
                   <button type="button" class="btn btn-sm ms-2 btn-primary">Reviews</button>
                 </div>
                 <small class="text-muted">USD - <?php echo $value['price'] ?></small>
@@ -53,4 +53,8 @@ $data = HomeController::getData();
       opacity: 1
     }, 2000);
   });
+
+  function viewDetail(productId) {
+    window.location.href = `products?product=${productId}`;
+  }
 </script>
