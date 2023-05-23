@@ -65,7 +65,7 @@ $data = ProductController::getData();
                             </td>
                             <td><?php echo $value['created_at'] ?></td>
                             <td><?php echo $value['updated_at'] ?></td>
-                            <td><button class="btn btn-primary mb-2 me-3" data-bs-toggle="modal" data-bs-target="#editModal" onclick="defineEditedItem(<?php echo $value['id']; ?>)">Edit</button><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="defineDeletedItem(<?php echo $value['id']; ?>)">Delete</button></td>
+                            <td><button class="btn btn-primary mb-2 me-3" data-bs-toggle="modal" data-bs-target="#editModal" onclick="defineEditedItem(<?php echo $value['id']; ?>)">Edit</button><button class="btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="defineDeletedItem(<?php echo $value['id']; ?>)">Delete</button></td>
                         </tr>
                 <?php }
                 }

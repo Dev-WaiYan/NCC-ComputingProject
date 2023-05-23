@@ -14,6 +14,7 @@
 <body>
     <?php
     require_once 'templates/common/utils/toast.php';
+    require_once 'templates/common/cart/index.php';
     require_once 'templates/common/navBar/index.php';
     require_once $__app;
     require_once 'templates/common/footer/index.php';

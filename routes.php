@@ -72,6 +72,12 @@ switch ($__path) {
         require_once "controller/api/AccountController.php";
         AccountController::register();
         break;
+    case '/api/v1/checkout':
+        require_once 'services/common/OrderService.php';
+        require_once 'services/common/PaymentService.php';
+        require_once "controller/api/OrderController.php";
+        OrderController::checkout();
+        break;
         // end - client api routes
         // end - api routes
 

@@ -39,6 +39,7 @@
       data: {},
       success: function(response) {
         if (response.success) {
+          sessionStorage.clear();
           setTimeout(() => {
             window.location.replace('login');
           }, 1000)

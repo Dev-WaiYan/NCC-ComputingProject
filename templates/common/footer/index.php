@@ -23,13 +23,12 @@
   </div>
   <div id="cart-container">
     <strong id="cart-count">0</strong>
-    <button class="btn btn-primary" id="cart"><i class="ri-shopping-cart-fill"></i></button>
+    <button type="button" onclick="viewCart()" class="btn btn-primary" id="cart" data-bs-toggle="modal" data-bs-target="#cartModal"><i class="ri-shopping-cart-fill"></i></button>
   </div>
 </footer>
 
 <script>
   $(document).ready(function() {
-
     // start - cart
     const storedItemsString = sessionStorage.getItem('cart');
     let storedItems = [];
