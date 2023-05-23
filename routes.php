@@ -109,6 +109,10 @@ switch ($__path) {
         require_once "controller/ProductController.php";
         $__app .= ProductController::view();
         break;
+    case '/myorders':
+        require_once "controller/MyOrderController.php";
+        $__app .= MyOrderController::view();
+        break;
     case '/login':
         require_once "controller/AccountController.php";
         $__app .= AccountController::loginView();

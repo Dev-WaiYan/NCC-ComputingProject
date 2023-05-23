@@ -12,6 +12,9 @@
         <li class="nav-item">
           <a class="nav-link" href="products">Products</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="myorders">My Orders</a>
+        </li>
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" id="searchInput" type="search" placeholder="Search" aria-label="Search">

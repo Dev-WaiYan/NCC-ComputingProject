@@ -117,7 +117,7 @@
                     if (response.status === 'ok') {
                         alert("Successfully added.");
                         sessionStorage.clear();
-                        window.location.reload();
+                        window.location.href = 'myorders';
                     } else {
                         throw new Error("Process failed.")
                     }

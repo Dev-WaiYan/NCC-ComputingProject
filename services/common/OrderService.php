@@ -26,4 +26,18 @@ class OrderService
 
         return $lastInsertId;
     }
+
+
+    public static function getOrdersByUserId($userId)
+    {
+
+        $result = null;
+        try {
+            $result = Db::select('orders', ['where' => ['customer_id' => $userId]]);
+        } catch (Exception $e) {
+            die('Error in Order Service : ' . $e->getMessage());
+        }
+
+        return $result;
+    }
 }
