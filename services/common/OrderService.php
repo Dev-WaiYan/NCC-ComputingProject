@@ -40,4 +40,31 @@ class OrderService
 
         return $result;
     }
+
+
+    public static function getOrders()
+    {
+
+        $result = null;
+        try {
+            $result = Db::select('orders');
+        } catch (Exception $e) {
+            die('Error in Order Service : ' . $e->getMessage());
+        }
+
+        return $result;
+    }
+
+    public static function updateDeliveryStatus($id, $data)
+    {
+        try {
+            Db::updateOne('orders', $id, [
+                'is_deliver_success' => $data['status'],
+            ]);
+        } catch (Exception $e) {
+            die('Error in Order Service : ' . $e->getMessage());
+        }
+
+        return true;
+    }
 }

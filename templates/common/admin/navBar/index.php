@@ -7,10 +7,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="category">CATEGORY</a>
+          <a class="nav-link" href="category">CATEGORY</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="product">PRODUCTS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="order">ORDERS</a>
         </li>
       </ul>
       <div class="d-block d-md-flex align-items-center" role="search">
@@ -18,8 +21,6 @@
         <div class="mt-4 mt-md-0">
           <?php if (isset($_SESSION['adminId'])) { ?>
             <button class="btn btn-primary" type="button" onclick="logout()">LOGOUT</button>
-          <?php } else { ?>
-            <button class="btn btn-primary" type="submit">LOGIN</button>
           <?php } ?>
         </div>
       </div>

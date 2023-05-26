@@ -26,4 +26,19 @@ class PaymentService
 
         return $result;
     }
+
+    public static function updatePaymentVerifyStatus($id, $data)
+    {
+        try {
+            Db::updateOne('payments', $id, [
+                'is_payment_verified' => $data['status'],
+                'payment_verified_admin_id' => $_SESSION['adminId'],
+                'payment_confirm_at' => date('Y-m-d H:i:s')
+            ]);
+        } catch (Exception $e) {
+            die('Error in Payment Service : ' . $e->getMessage());
+        }
+
+        return true;
+    }
 }
