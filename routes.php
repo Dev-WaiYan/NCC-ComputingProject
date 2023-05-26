@@ -78,6 +78,11 @@ switch ($__path) {
         require_once "controller/api/OrderController.php";
         OrderController::checkout();
         break;
+    case '/api/v1/feedback':
+        require_once 'services/common/FeedbackService.php';
+        require_once "controller/api/FeedbackController.php";
+        FeedbackController::create();
+        break;
         // end - client api routes
         // end - api routes
 

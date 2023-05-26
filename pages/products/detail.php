@@ -35,6 +35,17 @@ if (isset($product)) {
                 </div>
             </div>
         </div>
+        <?php if (isset($_SESSION['userId'])) { ?>
+            <div class="row mt-5">
+                <div class="col-md-8 offset-md-2">
+                    <label for="feedbackReview">
+                        Feedback for this item :
+                    </label>
+                    <textarea name="feedbackReview" id="feedbackReview" cols="30" rows="10" class="form-control" placeholder="Please give your review for this item."></textarea>
+                    <div class="d-flex justify-content-end my-3"><button type="button" class="btn btn-primary" onclick="sendFeedback()">Send Feedback</button></div>
+                </div>
+            </div>
+        <?php } ?>
     </div>
 <?php
 }
@@ -63,12 +74,18 @@ if (isset($product)) {
             const storedItemsString = sessionStorage.getItem('cart');
             let storedItems = [];
             if (storedItemsString) {
-               const items = JSON.parse(storedItemsString)
-               if (Array.isArray(items)) {
-                storedItems = items;
-               }
+                const items = JSON.parse(storedItemsString)
+                if (Array.isArray(items)) {
+                    storedItems = items;
+                }
             }
-            const updatedItems = [...storedItems, {productId, productName, productPrice, productCoverImg, quantity}];
+            const updatedItems = [...storedItems, {
+                productId,
+                productName,
+                productPrice,
+                productCoverImg,
+                quantity
+            }];
             $('#cart-count').text(updatedItems.length);
 
             sessionStorage.setItem('cart', JSON.stringify(updatedItems));
@@ -102,5 +119,35 @@ if (isset($product)) {
         //     });
         // } 
 
+    }
+
+    function sendFeedback() {
+        const productId = <?php echo $product["id"] ?>;
+        const feedback = $('#feedbackReview').val();
+
+        if (feedback) {
+            $.ajax({
+                method: "POST",
+                url: 'api/v1/feedback',
+                data: {
+                    feedbackReview : feedback,
+                    productId
+                },
+                success: function(response) {
+                    if (response.status === 'ok') {
+                        alert("Successfully sended.");
+                        $('#feedbackReview').val("");
+                    } else {
+                        throw new Error("Process failed.")
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr);
+                    alert("Process failed.");
+                }
+            });
+        } else {
+            alert("Please fill feedback.");
+        }
     }
 </script>
