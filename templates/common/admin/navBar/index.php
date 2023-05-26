@@ -16,9 +16,37 @@
       <div class="d-block d-md-flex align-items-center" role="search">
         <div class="me-4"><a href="profile">PROFILE</a></div>
         <div class="mt-4 mt-md-0">
-          <button class="btn btn-primary" type="submit">LOGOUT</button>
+          <?php if (isset($_SESSION['adminId'])) { ?>
+            <button class="btn btn-primary" type="button" onclick="logout()">LOGOUT</button>
+          <?php } else { ?>
+            <button class="btn btn-primary" type="submit">LOGIN</button>
+          <?php } ?>
         </div>
       </div>
     </div>
   </div>
 </nav>
+
+<script>
+  function logout() {
+    $.ajax({
+      method: "POST",
+      url: 'api/v1/logout',
+      data: {},
+      success: function(response) {
+        if (response.success) {
+          sessionStorage.clear();
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000)
+        } else {
+          alert("Logout failed.");
+        }
+      },
+      error: function(xhr, status, error) {
+        console.error(xhr);
+        alert("Something went wrong.");
+      }
+    });
+  }
+</script>

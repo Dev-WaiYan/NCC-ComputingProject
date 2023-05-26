@@ -6,30 +6,41 @@ $__app = 'pages';
 
 
 // start - middleware
-// if (!isset($_SESSION['userId'])) {
-//     if (!str_contains($__path, 'home') && !str_contains($__path, 'information') && !str_contains($__path, 'feature') && !str_contains($__path, 'local-attraction') && !str_contains($__path, 'register') && !str_contains($__path, 'login')) {
-//         header('Location: ' . 'login');
-//     }
-// } else if (isset($_SESSION['userId'])) {
-//     if (str_contains($__path, 'register') || str_contains($__path, 'login')) {
-//         header('Location: ' . 'home');
-//     }
-// }
+if (str_contains($__path, 'admin')) {
+    if (!isset($_SESSION['adminId']) && !str_contains($__path, 'admin/login') && !str_contains($__path, 'api/v1/login')) {
+        header("Location: " . BASE_URL . "/admin/login");
+    } else if (isset($_SESSION['adminId']) && str_contains($__path, 'admin/login')) {
+        header("Location: " . BASE_URL . "/admin/profile");
+    }
+} else if (isset($_SESSION['userId'])) {
+    if (str_contains($__path, 'register') || str_contains($__path, 'login')) {
+        header("Location: " . BASE_URL . "/home");
+    }
+}
 // end - middleware
 
 
 switch ($__path) {
-        // start - test
-    case '/test':
-        $__app .= "/test/index.php";
-        break;
-        // end - test
-
         // api routes
         // start - Admin api routes
+    case '/admin/api/v1/login':
+        require_once 'services/admin/AccountService.php';
+        require_once "controller/api/admin/AccountController.php";
+        AccountController::login();
+        break;
     case '/admin/api/v1/register':
+        require_once 'services/admin/AccountService.php';
         require_once "controller/api/admin/AccountController.php";
         AccountController::register();
+        break;
+    case '/admin/api/v1/logout':
+        require_once "controller/api/admin/AccountController.php";
+        AccountController::logout();
+        break;
+    case '/admin/api/v1/account/update':
+        require_once 'services/admin/AccountService.php';
+        require_once "controller/api/admin/AccountController.php";
+        AccountController::updateAccount();
         break;
     case '/admin/api/v1/category':
         require_once 'services/admin/CategoryService.php';
@@ -89,7 +100,10 @@ switch ($__path) {
         // start - page routes
         // admin routes
     case '/admin':
-        header("Location: admin/profile");
+    case '/admin/':
+    case '/admin/login':
+        require_once "controller/admin/AccountController.php";
+        $__app .= AccountController::loginView();
         break;
     case '/admin/profile':
         require_once "controller/admin/AccountController.php";
@@ -126,40 +140,8 @@ switch ($__path) {
         require_once "controller/AccountController.php";
         $__app .= AccountController::registerView();
         break;
-        // case '/contact':
-        //     require_once "controller/ContactController.php";
-        //     $__app .= ContactController::view();
-        //     break;
-        // case '/give-review':
-        //     require_once "controller/ReviewController.php";
-        //     $__app .= ReviewController::view();
-        //     break;
-        // case '/privacy-policy':
-        //     require_once "controller/PrivacyPolicyController.php";
-        //     $__app .= PrivacyPolicyController::view();
-        //     break;
-        // case '/login':
-        //     require_once "controller/AccountController.php";
-        //     $__app .= AccountController::loginView();
-        //     break;
-        // case '/logout':
-        //     require_once "controller/AccountController.php";
-        //     AccountController::logout();
-        //     break;
-        // case '/register':
-        //     require_once "controller/AccountController.php";
-        //     $__app .= AccountController::registerView();
-        //     break;
     default:
-        die($__path);
-        // default:
-        //     if (isset($_SESSION['userId'])) {
-        //         require_once "controller/HomeController.php";
-        //         $__app .= HomeController::view();
-        //     } else {
-        //         require_once "controller/AccountController.php";
-        //         $__app .= AccountController::loginView();
-        //     }
+        header("Location: " . BASE_URL . "/home");
         // end - page routes
 }
 

@@ -17,7 +17,7 @@ $data = AccountController::getData();
                         <form>
                             <div class="mb-3">
                                 <label for="userName" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="userName" disabled value="adbcd">
+                                <input type="text" class="form-control" id="userName" disabled value="<?php echo $_SESSION['userName'] ?>">
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
@@ -25,60 +25,27 @@ $data = AccountController::getData();
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Role</label>
-                                <input type="text" class="form-control" disabled value="admin">
+                                <input type="text" class="form-control" disabled value="<?php echo isset($_SESSION['roleId']) && $_SESSION['roleId'] === 1 ? 'admin' : 'staff' ?>">
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="button" class="btn btn-primary" onclick="save()">Save</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6 d-flex justify-content-center my-4">
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrationModal">Register New Admin</button>
+        <?php if (isset($_SESSION['roleId']) && $_SESSION['roleId'] === 1) { ?>
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 d-flex justify-content-center my-4">
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrationModal">Register New Admin</button>
+                </div>
             </div>
-        </div>
+        <?php } ?>
     </div>
 </main>
 
-<!-- Registration Modal -->
-<div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="registrationModalLabel">New Admin</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <label for="newAccountUsername" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="newAccountUsername">
-                    </div>
-                    <div class="mb-3">
-                        <label for="newAccountPassword" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="newAccountPassword" placeholder="Enter new password">
-                    </div>
-                    <div class="mb-3">
-                        <label for="role" class="form-label">Role</label>
-                        <select class="form-control" id="role">
-                            <?php
-                            foreach ($data->roles as $role) {
-                                echo "<option value='" . $role['id'] . "'>" . $role['role_name'] . "</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="register()">Save</button>
-            </div>
-        </div>
-    </div>
-</div>
+<?php require_once './pages/admin/register/index.php' ?>
 
 
 <script>
@@ -105,19 +72,47 @@ $data = AccountController::getData();
                     if (response.existedUser) {
                         alert("Account has existed already.");
                     } else if (response.adminId) {
-                        alert("Successfully registered. Will redirect soon to login.");
+                        alert("Successfully registered.");
                         window.location.reload();
                     } else {
                         throw new Error("Registration failed.")
                     }
-
-                    // setTimeout(() => {
-                    //     window.location.replace('login')
-                    // }, 1000)
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr);
                     alert("Registration failed.");
+                }
+            });
+        } else {
+            alert("Please fill required fields.");
+        }
+    }
+
+    function save() {
+        const password = $('#password').val();
+        if (password) {
+            if (!isValidPassword(password)) {
+                alert("Please valid password. Password must have min 8 letter password, with at least a symbol, upper and lower case letters and a number.");
+                return;
+            }
+
+            $.ajax({
+                method: "POST",
+                url: 'api/v1/account/update',
+                data: {
+                   password
+                },
+                success: function(response) {
+                    if (response.status === 'ok') {
+                        alert("Successfully updated.");
+                        window.location.reload();
+                    } else {
+                        throw new Error("Process failed.")
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr);
+                    alert("Process failed.");
                 }
             });
         } else {

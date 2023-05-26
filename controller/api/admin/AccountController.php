@@ -48,6 +48,7 @@ class AccountController
             if ($admin && password_verify($_POST['password'], $admin['password'])) {
                 $_SESSION['adminId'] = $admin['id'];
                 $_SESSION['roleId'] = $admin['role_id'];
+                $_SESSION['userName'] = $admin['user_name'];
 
                 echo json_encode(array('status' => 'ok', 'error' => '', 'admin' => [
                     'id' => $admin['id'],
@@ -55,6 +56,30 @@ class AccountController
             } else {
                 echo json_encode(array('status' => 'ok', 'error' => '', 'admin' => null));
             }
+        } catch (Exception $e) {
+            echo json_encode(array('status' => 'error', 'error' => $e->getMessage()));
+        }
+    }
+
+
+    public static function updateAccount()
+    {
+        $data = array(
+            'password' => password_hash($_POST['password'], PASSWORD_DEFAULT)
+        );
+
+        try {
+            AccountService::updateAccount($_SESSION['adminId'], $data);
+            echo json_encode(array('status' => 'ok', 'error' => ''));
+        } catch (Exception $e) {
+            echo json_encode(array('status' => 'error', 'error' => $e->getMessage()));
+        }
+    }
+
+    public static function logout()
+    {
+        try {
+            echo json_encode(array('status' => 'ok', 'error' => '', 'success' => session_destroy()));
         } catch (Exception $e) {
             echo json_encode(array('status' => 'error', 'error' => $e->getMessage()));
         }

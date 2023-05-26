@@ -7,6 +7,11 @@ class AccountController
         return "/admin/account/index.php";
     }
 
+    public static function loginView()
+    {
+        return "/admin/login/index.php";
+    }
+
     public static function getData() {
         require_once 'services/admin/RoleService.php';
         $roles = RoleService::getRoles();

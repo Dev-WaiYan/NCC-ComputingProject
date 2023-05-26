@@ -12,9 +12,11 @@
         <li class="nav-item">
           <a class="nav-link" href="products">Products</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="myorders">My Orders</a>
-        </li>
+        <?php if (isset($_SESSION['userId'])) { ?>
+          <li class="nav-item">
+            <a class="nav-link" href="myorders">My Orders</a>
+          </li>
+        <?php } ?>
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" id="searchInput" type="search" placeholder="Search" aria-label="Search">

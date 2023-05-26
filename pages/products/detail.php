@@ -90,35 +90,6 @@ if (isset($product)) {
 
             sessionStorage.setItem('cart', JSON.stringify(updatedItems));
         }
-
-        // if (email && password && userName && phone) {
-        //     $.ajax({
-        //         method: "POST",
-        //         url: 'api/v1/register',
-        //         data: {
-        //             email,
-        //             password,
-        //             userName,
-        //             phone
-        //         },
-        //         success: function(response) {
-        //             if (response.existedUser) {
-        //                 alert("Account has existed already.");
-        //             } else {
-        //                 alert("Successfully registered. Will redirect soon to login.");
-        //             }
-
-        //             setTimeout(() => {
-        //                 window.location.replace('login')
-        //             }, 1000)
-        //         },
-        //         error: function(xhr, status, error) {
-        //             console.error(xhr);
-        //             alert("Registration failed.");
-        //         }
-        //     });
-        // } 
-
     }
 
     function sendFeedback() {

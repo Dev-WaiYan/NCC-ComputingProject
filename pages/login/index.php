@@ -29,10 +29,8 @@ $__cssLinks = ['styles/pages/login.css'];
         const email = $('#email').val();
         const password = $('#password').val();
         const queryString = window.location.search;
-const searchParams = new URLSearchParams(queryString);
-const isNeedToRedirect = searchParams.get('redirect');
-
-console.log("isNeedTo", isNeedToRedirect)
+        const searchParams = new URLSearchParams(queryString);
+        const isNeedToRedirect = searchParams.get('redirect');
 
         if (email && password) {
             $.ajax({
