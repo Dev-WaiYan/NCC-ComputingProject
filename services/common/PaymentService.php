@@ -15,11 +15,24 @@ class PaymentService
     }
 
 
-    public static function getPaymentByOrderId($orderId)
+    public static function getPayments($conditions = [])
     {
         $result = null;
         try {
-            $result = Db::selectOne('payments', ['where' => ['order_id' => $orderId]]);
+            $result = Db::select('payments', $conditions);
+        } catch (Exception $e) {
+            die('Error in Payment Service : ' . $e->getMessage());
+        }
+
+        return $result;
+    }
+
+
+    public static function getPaymentByOrderId($orderId, $whereConditions = [])
+    {
+        $result = null;
+        try {
+            $result = Db::selectOne('payments', ['where' => array_merge($whereConditions, ['order_id' => $orderId])]);
         } catch (Exception $e) {
             die('Error in Order Service : ' . $e->getMessage());
         }

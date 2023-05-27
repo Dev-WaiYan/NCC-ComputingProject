@@ -15,6 +15,14 @@
         <li class="nav-item">
           <a class="nav-link" href="order">ORDERS</a>
         </li>
+        <?php
+        if (isset($_SESSION['roleId']) && $_SESSION['roleId'] === 1) {
+        ?>
+          <li class="nav-item">
+            <a class="nav-link" href="report">REPORTS</a>
+          </li>
+        <?php }
+        ?>
       </ul>
       <div class="d-block d-md-flex align-items-center" role="search">
         <div class="me-4"><a href="profile">PROFILE</a></div>

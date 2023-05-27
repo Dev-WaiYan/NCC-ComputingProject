@@ -42,12 +42,30 @@ class OrderService
     }
 
 
-    public static function getOrders()
+    public static function getProductTotalQuantityOrder()
+    {
+        $result = null;
+        $conditions = array(
+            'select' => 'product_id, SUM(quantity) as total_quantity',
+            'group_by' => 'product_id',
+            'return_type' => 'all'
+        );
+        try {
+            $result = Db::select('order_details', $conditions);
+        } catch (Exception $e) {
+            die('Error in Order Service : ' . $e->getMessage());
+        }
+
+        return $result;
+    }
+
+
+    public static function getOrders($conditions = [])
     {
 
         $result = null;
         try {
-            $result = Db::select('orders');
+            $result = Db::select('orders', $conditions);
         } catch (Exception $e) {
             die('Error in Order Service : ' . $e->getMessage());
         }

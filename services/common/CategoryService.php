@@ -18,17 +18,17 @@ class CategoryService
     }
 
 
-    // public static function getCategory($id)
-    // {
+    public static function getCategory($id)
+    {
 
-    //     $result = null;
+        $result = null;
 
-    //     try {
-    //         $result = Db::selectOne('product_categories', ['where' => ['id' => $id]]);
-    //     } catch (Exception $e) {
-    //         die('Error in Category Service : ' . $e->getMessage());
-    //     }
+        try {
+            $result = Db::selectOne('product_categories', ['where' => ['id' => $id]]);
+        } catch (Exception $e) {
+            die('Error in Category Service : ' . $e->getMessage());
+        }
 
-    //     return $result;
-    // }
+        return $result;
+    }
 }

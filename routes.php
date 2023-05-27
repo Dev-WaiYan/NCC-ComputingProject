@@ -53,6 +53,12 @@ switch ($__path) {
         require_once "controller/api/admin/OrderController.php";
         OrderController::deliComplete();
         break;
+    case '/admin/api/v1/report':
+        require_once 'services/common/OrderService.php';
+        require_once 'services/common/PaymentService.php';
+        require_once "controller/api/admin/ReportController.php";
+        ReportController::report();
+        break;
     case '/admin/api/v1/category':
         require_once 'services/admin/CategoryService.php';
         require_once "controller/api/admin/CategoryController.php";
@@ -116,10 +122,6 @@ switch ($__path) {
         require_once "controller/admin/AccountController.php";
         $__app .= AccountController::loginView();
         break;
-    case '/admin/feedback':
-        require_once "controller/admin/FeedbackController.php";
-        $__app .= FeedbackController::view();
-        break;
     case '/admin/profile':
         require_once "controller/admin/AccountController.php";
         $__app .= AccountController::view();
@@ -135,6 +137,10 @@ switch ($__path) {
     case '/admin/order':
         require_once "controller/admin/OrderController.php";
         $__app .= OrderController::view();
+        break;
+    case '/admin/report':
+        require_once "controller/admin/ReportController.php";
+        $__app .= ReportController::view();
         break;
 
         // user routes

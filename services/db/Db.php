@@ -44,12 +44,23 @@ class Db implements IDb
         $sql = 'SELECT ';
         $sql .= array_key_exists("select", $conditions) ? $conditions['select'] : '*';
         $sql .= ' FROM ' . $table;
+    
         if (array_key_exists("where", $conditions)) {
             $sql .= ' WHERE ';
             $i = 0;
             foreach ($conditions['where'] as $key => $value) {
                 $pre = ($i > 0) ? ' AND ' : '';
-                if (strpos($value, 'like ') === 0) { // check for "like" operator at the beginning of the value
+                if ($key === 'created_at') {
+                    if (is_array($value) && count($value) === 2) {
+                        $start = $value[0];
+                        $end = $value[1];
+                        $sql .= $pre . $key . " BETWEEN '" . $start . "' AND '" . $end . "'";
+                    } else {
+                        // Handle error or provide a default behavior
+                    }
+                } elseif ($value === null) {
+                    $sql .= $pre . $key . ' IS NULL';
+                } elseif (strpos($value, 'like ') === 0) {
                     $sql .= $pre . $key . ' LIKE \'' . substr($value, 5) . '\'';
                 } else {
                     $sql .= $pre . $key . " = '" . $value . "'";
@@ -57,20 +68,20 @@ class Db implements IDb
                 $i++;
             }
         }
-
+    
         if (array_key_exists("order_by", $conditions)) {
             $sql .= ' ORDER BY ' . $conditions['order_by'];
         }
-
+    
         if (array_key_exists("start", $conditions) && array_key_exists("limit", $conditions)) {
             $sql .= ' LIMIT ' . $conditions['start'] . ',' . $conditions['limit'];
         } elseif (!array_key_exists("start", $conditions) && array_key_exists("limit", $conditions)) {
             $sql .= ' LIMIT ' . $conditions['limit'];
         }
-
+    
         $query = self::$connection->prepare($sql);
         $query->execute();
-
+    
         if (array_key_exists("return_type", $conditions) && $conditions['return_type'] != 'all') {
             switch ($conditions['return_type']) {
                 case 'count':
@@ -87,10 +98,11 @@ class Db implements IDb
                 $data = $query->fetchAll();
             }
         }
-        return !empty($data) ? $data : null;
+    
+        return !empty($data) ? $data : [];
     }
-
-
+    
+    
 
     public static function selectOne($table, $conditions = array())
     {
