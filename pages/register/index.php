@@ -39,7 +39,7 @@ $__cssLinks = ['styles/pages/register.css'];
         const userName = $('#userName').val();
         const phone = $('#phone').val();
 
-        if (!isValidPassword(password)) {
+        if (password && !isValidPassword(password)) {
             alert("Please valid password. Password must have min 8 letter password, with at least a symbol, upper and lower case letters and a number.");
             return;
         }

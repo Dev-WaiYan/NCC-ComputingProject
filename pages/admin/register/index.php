@@ -14,7 +14,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="newAccountPassword" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="newAccountPassword" placeholder="Enter new password">
+                        <input type="password" class="form-control" id="newAccountPassword">
                     </div>
                     <div class="mb-3">
                         <label for="role" class="form-label">Role</label>
